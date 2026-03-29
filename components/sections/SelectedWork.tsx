@@ -4,6 +4,7 @@ import { ArrowRight, ArrowUpRight } from 'lucide-react';
 
 import { FadeIn } from '@/components/shared/FadeIn';
 import { ClipReveal } from '@/components/shared/ClipReveal';
+import { BorderBeamCard } from '@/components/ui/BorderBeamCard';
 import { cn } from '@/lib/utils';
 import { FEATURED_PROJECTS } from '@/data/projects';
 import type { Project } from '@/types/project';
@@ -18,8 +19,9 @@ function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Link
       href={`/work/${project.slug}`}
-      className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--bg-primary)] rounded-xl transition-transform duration-[400ms] ease-out hover:-translate-y-1"
+      className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-4 focus-visible:ring-offset-[var(--bg-primary)] rounded-[16px] transition-transform duration-[400ms] ease-out hover:-translate-y-1"
     >
+      <BorderBeamCard className="h-full aspect-auto w-full" borderClass="bg-[var(--bg-primary)] p-4 sm:p-6">
       {/* Image / placeholder */}
       <ClipReveal direction="bottom" duration={1.0}>
         <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-[var(--bg-elevated)]">
@@ -128,6 +130,7 @@ function ProjectCard({ project }: ProjectCardProps) {
           </span>
         </div>
       </div>
+      </BorderBeamCard>
     </Link>
   );
 }

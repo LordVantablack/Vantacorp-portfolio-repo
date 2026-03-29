@@ -77,6 +77,14 @@ export function ContactCTA() {
               'radial-gradient(ellipse 60% 70% at 50% 50%, var(--accent-muted), transparent)',
           }}
         />
+        {/* Secondary cool glow — offset for depth */}
+        <div
+          className="absolute w-[500px] h-[300px] translate-x-32 -translate-y-8"
+          style={{
+            background:
+              'radial-gradient(ellipse 50% 60% at 50% 50%, var(--accent-secondary-muted), transparent)',
+          }}
+        />
       </div>
 
       <div className="relative flex flex-col items-center text-center">

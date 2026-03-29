@@ -6,6 +6,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { PageTransition } from "@/components/layout/PageTransition";
+import { InteractiveCursor } from "@/components/ui/InteractiveCursor";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${syne.variable} ${dmSans.variable} ${jetbrainsMono.variable} dark`}>
       <body>
         <SmoothScroll>
+          <InteractiveCursor />
           <ConvexClientProvider>
             <Navbar />
             <main id="main"><PageTransition>{children}</PageTransition></main>
