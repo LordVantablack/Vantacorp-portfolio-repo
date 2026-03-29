@@ -9,6 +9,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { useGSAP } from '@/hooks/useGSAP';
 import { FadeIn } from '@/components/shared/FadeIn';
+import { MagneticButton } from '@/components/shared/MagneticButton';
+import { SpotlightBackground } from '@/components/ui/SpotlightBackground';
+import { WebGLShader } from '@/components/ui/web-gl-shader';
+import { LiquidButton } from '@/components/ui/liquid-glass-button';
 import { DURATION, EASE, prefersReducedMotion } from '@/lib/animations';
 import { cn } from '@/lib/utils';
 
@@ -30,14 +34,14 @@ export interface HeroProps {
 // ── Marquee placeholder gradients ────────────────────────────────────────────
 
 const PLACEHOLDERS = [
-  'from-[#1c1c3a] to-[#0d0d22]',
-  'from-[#1c2210] to-[#121808]',
-  'from-[#2a1414] to-[#1a0c0c]',
-  'from-[#14142e] to-[#0d0d22]',
-  'from-[#182218] to-[#0e180e]',
-  'from-[#301e0e] to-[#1e1008]',
-  'from-[#0e2020] to-[#081818]',
-  'from-[#1e1030] to-[#140c1e]',
+  'from-[#1a1820] to-[#0d0c14]',   // deep indigo
+  'from-[#1e1810] to-[#120e08]',   // warm amber dark
+  'from-[#18141e] to-[#0e0c14]',   // muted violet
+  'from-[#1c1a12] to-[#100e08]',   // burnished gold
+  'from-[#14161e] to-[#0a0c14]',   // steel blue
+  'from-[#201a10] to-[#14100a]',   // deep bronze
+  'from-[#121620] to-[#0a0e16]',   // midnight navy
+  'from-[#1e1614] to-[#140e0c]',   // warm umber
 ] as const;
 
 // 8 placeholder items used when no real marquee images are supplied
@@ -234,12 +238,14 @@ export function Hero({
 
       gsap.from(spans, {
         yPercent: 100,
-        duration: 0.8,
+        filter: 'blur(12px)',
+        opacity: 0,
+        duration: 1,
         delay: 0.2,
         stagger: 0.1,
         ease: EASE.primary,
         onComplete() {
-          gsap.set(spans, { clearProps: 'transform' });
+          gsap.set(spans, { clearProps: 'all' });
         },
       });
     },
@@ -289,6 +295,10 @@ export function Hero({
       id="hero"
       className="relative w-full h-[100dvh] flex flex-col overflow-hidden bg-[var(--bg-primary)]"
     >
+      <div className="absolute inset-0 z-0 opacity-40 pointer-events-none overflow-hidden [mask-image:linear-gradient(to_bottom,white_40%,transparent)]">
+        <WebGLShader />
+      </div>
+      <SpotlightBackground />
       {/* Upper 60% — text and CTAs */}
       <div
         ref={contentRef}
@@ -338,31 +348,28 @@ export function Hero({
         {/* CTAs — fade up at 0.9 s */}
         <FadeIn delay={0.9} direction="up" distance={20} duration={DURATION.medium}>
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
-            <Link
-              href={primaryCTA.href}
-              className={cn(
-                'inline-flex items-center justify-center rounded-full',
-                'px-8 py-3 text-sm font-medium font-[family-name:var(--font-body)]',
-                'bg-[var(--accent)] text-[var(--bg-primary)]',
-                'transition-[colors,transform] duration-300 hover:bg-[var(--accent-hover)] hover:scale-[1.02]',
-                'active:scale-[0.98]',
-              )}
-            >
-              {primaryCTA.label}
-            </Link>
-            <Link
-              href={secondaryCTA.href}
-              className={cn(
-                'inline-flex items-center justify-center rounded-full',
-                'px-8 py-3 text-sm font-medium font-[family-name:var(--font-body)]',
-                'border border-[var(--border-visible)] text-[var(--text-primary)]',
-                'transition-colors duration-300',
-                'hover:border-[var(--border-hover)] hover:bg-[var(--bg-hover)]',
-                'active:scale-[0.98]',
-              )}
-            >
-              {secondaryCTA.label}
-            </Link>
+            <MagneticButton intensity={10}>
+              <Link href={primaryCTA.href} tabIndex={-1}>
+                <LiquidButton as="div" className="rounded-full border border-white/10 text-white font-[family-name:var(--font-body)] font-medium cursor-pointer flex items-center justify-center p-0 px-8 py-3" size="lg">
+                  {primaryCTA.label}
+                </LiquidButton>
+              </Link>
+            </MagneticButton>
+            <MagneticButton intensity={10}>
+              <Link
+                href={secondaryCTA.href}
+                className={cn(
+                  'inline-flex items-center justify-center rounded-full',
+                  'px-8 py-3 text-sm font-medium font-[family-name:var(--font-body)]',
+                  'border border-[var(--border-visible)] text-[var(--text-primary)]',
+                  'transition-colors duration-300',
+                  'hover:border-[var(--border-hover)] hover:bg-[var(--bg-hover)]',
+                  'active:scale-[0.98]',
+                )}
+              >
+                {secondaryCTA.label}
+              </Link>
+            </MagneticButton>
           </div>
         </FadeIn>
       </div>

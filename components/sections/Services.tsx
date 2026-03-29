@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
 import { FadeIn } from '@/components/shared/FadeIn';
+import { BorderBeamCard } from '@/components/ui/BorderBeamCard';
 import { cn } from '@/lib/utils';
 import { DURATION } from '@/lib/animations';
 
@@ -62,7 +63,7 @@ function ServiceItem({ service, isOpen, onToggle }: ServiceItemProps) {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <div className="border-b border-[var(--border-subtle)]">
+    <BorderBeamCard className="w-full mb-4" borderClass="bg-[var(--bg-primary)] px-4 md:px-8 transition-colors duration-500">
       {/* Header row — always visible */}
       <button
         onClick={onToggle}
@@ -151,7 +152,7 @@ function ServiceItem({ service, isOpen, onToggle }: ServiceItemProps) {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </BorderBeamCard>
   );
 }
 
@@ -216,7 +217,7 @@ export function Services({ expandable = true }: ServicesProps) {
       </FadeIn>
 
       {/* Service rows — each row has its own scroll trigger + staggered delay */}
-      <div className="border-t border-[var(--border-subtle)]">
+      <div className="flex flex-col gap-2">
         {SERVICES.map((service, i) => (
           <FadeIn key={service.number} direction="up" distance={30} delay={i * 0.07}>
             <ServiceItem

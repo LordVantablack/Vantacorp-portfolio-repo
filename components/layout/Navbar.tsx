@@ -408,7 +408,7 @@ export function Navbar() {
             'px-[clamp(20px,5vw,80px)]',
             'transition-all duration-300 ease-in-out',
             scrolled &&
-              'bg-[rgba(5,5,5,0.8)] backdrop-blur-xl border-b border-[var(--border-subtle)]',
+              'bg-[rgba(6,6,8,0.85)] backdrop-blur-xl border-b border-[var(--border-subtle)]',
           )}
         >
           {/* Logo */}
