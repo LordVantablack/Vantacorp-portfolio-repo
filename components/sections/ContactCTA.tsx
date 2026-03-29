@@ -7,6 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { useGSAP } from '@/hooks/useGSAP';
 import { FadeIn } from '@/components/shared/FadeIn';
+import { WavePath } from '@/components/ui/wave-path';
 import { EASE, DURATION, prefersReducedMotion } from '@/lib/animations';
 import { cn } from '@/lib/utils';
 
@@ -148,8 +149,13 @@ export function ContactCTA() {
           </p>
         </FadeIn>
 
+        {/* Interactive Wave — fades up in sequence */}
+        <FadeIn direction="up" distance={20} delay={0.4} className="mt-12 text-[var(--border-strong)] hover:text-[var(--accent)] transition-colors duration-500">
+          <WavePath />
+        </FadeIn>
+
         {/* CTA button — last to appear */}
-        <FadeIn direction="up" distance={20} delay={0.45} className="mt-10">
+        <FadeIn direction="up" distance={20} delay={0.5} className="mt-12">
           <Link
             href="/contact"
             className={cn(
