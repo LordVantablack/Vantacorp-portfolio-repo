@@ -11,6 +11,8 @@ import { useGSAP } from '@/hooks/useGSAP';
 import { FadeIn } from '@/components/shared/FadeIn';
 import { MagneticButton } from '@/components/shared/MagneticButton';
 import { SpotlightBackground } from '@/components/ui/SpotlightBackground';
+import { WebGLShader } from '@/components/ui/web-gl-shader';
+import { LiquidButton } from '@/components/ui/liquid-glass-button';
 import { DURATION, EASE, prefersReducedMotion } from '@/lib/animations';
 import { cn } from '@/lib/utils';
 
@@ -293,6 +295,9 @@ export function Hero({
       id="hero"
       className="relative w-full h-[100dvh] flex flex-col overflow-hidden bg-[var(--bg-primary)]"
     >
+      <div className="absolute inset-0 z-0 opacity-40 pointer-events-none overflow-hidden [mask-image:linear-gradient(to_bottom,white_40%,transparent)]">
+        <WebGLShader />
+      </div>
       <SpotlightBackground />
       {/* Upper 60% — text and CTAs */}
       <div
@@ -344,17 +349,10 @@ export function Hero({
         <FadeIn delay={0.9} direction="up" distance={20} duration={DURATION.medium}>
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
             <MagneticButton intensity={10}>
-              <Link
-                href={primaryCTA.href}
-                className={cn(
-                  'inline-flex items-center justify-center rounded-full',
-                  'px-8 py-3 text-sm font-medium font-[family-name:var(--font-body)]',
-                  'bg-[var(--accent)] text-[var(--bg-primary)]',
-                  'transition-[colors,transform] duration-300 hover:bg-[var(--accent-hover)] hover:scale-[1.02]',
-                  'active:scale-[0.98]',
-                )}
-              >
-                {primaryCTA.label}
+              <Link href={primaryCTA.href} tabIndex={-1}>
+                <LiquidButton as="div" className="rounded-full border border-white/10 text-white font-[family-name:var(--font-body)] font-medium cursor-pointer flex items-center justify-center p-0 px-8 py-3" size="lg">
+                  {primaryCTA.label}
+                </LiquidButton>
               </Link>
             </MagneticButton>
             <MagneticButton intensity={10}>
